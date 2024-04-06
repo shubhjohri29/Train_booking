@@ -68,6 +68,31 @@ public class AppController {
         }
         return response;
     }
+    @PostMapping("/addTrain")
+    public HashMap<String, String> addtrain(Train train) {
+        HashMap<String, String> response = new HashMap<>();
+        System.out.println("Trian:" + train);
+        if (trainR.save(train) != null) {
+            response.put("error", "false");
+            response.put("message", "Added Succesfully");
+        } else {
+            response.put("error", "true");
+            response.put("message", "Failed");
+        }
+        return response;
+    }
+    @GetMapping("/showTrain")
+    public List<Train> getTrains() {
+        return trainR.findAll();
+    }
+
+
+
+    @GetMapping("/showStation")
+    public List<Station> showstation() {
+        return stationR.findAll();
+    }
+
     @PostMapping("/userRegister")
     public HashMap<String, String> userRegister(User user) {
         HashMap<String, String> response = new HashMap<>();
