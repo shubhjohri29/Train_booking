@@ -56,11 +56,10 @@ public class AppController {
         }
         return response;
     }
-    @PostMapping("/addTrain")
-    public HashMap<String, String> addtrain(Train train) {
+    @PostMapping("/addStation")
+    public HashMap<String, String> addStation(Station station) {
         HashMap<String, String> response = new HashMap<>();
-        System.out.println("Trian:" + train);
-        if (trainR.save(train) != null) {
+        if (stationR.save(station) != null) {
             response.put("error", "false");
             response.put("message", "Added Succesfully");
         } else {
@@ -81,5 +80,25 @@ public class AppController {
         }
         return response;
     }
-
+    @PostMapping("/userLogin")
+    public HashMap<String, String> userLogin(String username, String password) {
+        HashMap<String, String> response = new HashMap<>();
+        User user;
+        System.out.println("Username:" + username);
+        if (userR.findByUserName(username) != null) {
+            user = userR.findByUserName(username);
+            if (password.equals(user.getPassword())) {
+                response.put("error", "false");
+                response.put("Message", "Login Success");
+                System.out.println(user);
+            } else {
+                response.put("error", "false");
+                response.put("Message", "Incorrect Password");
+            }
+        } else {
+            response.put("error", "true");
+            response.put("Message", "User Do not exist");
+        }
+        return response;
+    }
 }
