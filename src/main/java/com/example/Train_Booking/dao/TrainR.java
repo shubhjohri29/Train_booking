@@ -13,7 +13,9 @@ public interface TrainR extends JpaRepository<Train,Integer> {
 
     @Query(value="SELECT * FROM train t WHERE t.start_station= :startStationCode AND t.stop_station = :stopStationCode", nativeQuery = true)
     List<Train> getTrainByStartStop(int startStationCode, int stopStationCode);
-//	StationBetween findById(int trianNo);
 
-    static Train getByTrainNo(int trainNo);
+
+    static Train getByTrainNo(int trainNo) {
+        return null;
+    }
 }
